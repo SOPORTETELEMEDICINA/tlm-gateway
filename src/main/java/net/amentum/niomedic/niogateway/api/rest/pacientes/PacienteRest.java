@@ -83,6 +83,17 @@ public interface PacienteRest {
                                           @RequestParam(required = false, value = "orderType") String orderType,
                                           @RequestParam(required = false, value = "idUser") Long idUser) throws PacienteException;
 
+   @GetMapping("pacientes/page/atendidos")
+   Page<PacientePageView> getPacientePageAtendidos(@RequestParam(required = false, defaultValue = "", value = "datosBusqueda") String datosBusqueda,
+                                                     @RequestParam(required = false, value = "active") Boolean active,
+//                                          @RequestParam(required = false, defaultValue = "", value = "name") String name,
+                                                     @RequestParam(required = false, value = "page") Integer page,
+                                                     @RequestParam(required = false, value = "size") Integer size,
+                                                     @RequestParam(required = false, value = "orderColumn") String orderColumn,
+                                                     @RequestParam(required = false, value = "orderType") String orderType,
+                                                     @RequestParam(required = false, value = "idUser") Long idUser) throws PacienteException;
+
+
    @DeleteMapping("pacientes/rollback/{idUserApp}")
    void deleteRollback(@PathVariable("idUserApp") Long idUserApp) throws PacienteException;
 

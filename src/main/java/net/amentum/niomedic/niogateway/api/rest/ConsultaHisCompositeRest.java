@@ -216,6 +216,7 @@ public class ConsultaHisCompositeRest {
 		paciente.setNumeroAfiliacion(pacientehis.getNumeroAfiliacion());
 		paciente.setNumeroExpediente(pacientehis.getNumeroExpediente());
 		paciente.setTipoSangre(pacientehis.getTipoSangre());
+		paciente.setPacienteAtendido(paciente.getPacienteAtendido());
 		return paciente;
 
 	}

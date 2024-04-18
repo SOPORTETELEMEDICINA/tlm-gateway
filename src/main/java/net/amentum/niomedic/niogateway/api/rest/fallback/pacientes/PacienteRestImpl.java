@@ -90,6 +90,18 @@ public Page<PacientePageView> getPacienteSearch(Boolean active, String datosBusq
    }
 
    @Override
+   public Page<PacientePageView> getPacientePageAtendidos(String datosBusqueda,
+                                                            Boolean active,
+                                                            Integer page,
+                                                            Integer size,
+                                                            String orderColumn,
+                                                            String orderType,
+                                                            Long idUser) {
+      logger.error("Error al OBTENER PÁGINA de pacientes atendidos - active: {} - page: - {} size: {} - orderColumn: {} - orderType: {} - idUser: {}",
+              active, page, size, orderColumn, orderType, idUser);
+      return null;
+   }
+   @Override
    public void deleteRollback(Long idUserApp) {
       logger.error("Error al acceder al servicio para hacer rollback");
    }

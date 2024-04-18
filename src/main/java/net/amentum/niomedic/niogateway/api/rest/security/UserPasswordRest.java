@@ -21,6 +21,11 @@ public interface UserPasswordRest {
     @GetMapping(value = "users/recoverPassword")
     UserAppPageView recoverPassword(@RequestParam(name = "email") String email);
 
+    @GetMapping(value = "users/hashPass")
+    String hashPass(@RequestParam(name = "user")String user,@RequestParam(name = "pass")String pass);
+
+
+
     @PostMapping(value = "users/recoverPassword")
     void validatePassword(@Validated @RequestBody RecoverPasswordRequestView requestView);
 

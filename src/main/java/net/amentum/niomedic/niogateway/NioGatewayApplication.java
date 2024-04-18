@@ -80,6 +80,7 @@ public class NioGatewayApplication {
                "/message-test" ,
                "/refreshsocket/**","/hystrix.stream**").permitAll()
             .antMatchers(HttpMethod.POST,"/users").permitAll()
+            .antMatchers(HttpMethod.GET,"/users/hashPass**").permitAll()
             .antMatchers(HttpMethod.GET,"/users/recoverPassword**","users/findImageByUsername**").permitAll()
             .antMatchers(HttpMethod.GET,"/new-user/link**").permitAll()
             .antMatchers(HttpMethod.GET,"/new-user/find**").permitAll()

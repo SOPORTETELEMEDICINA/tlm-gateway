@@ -25,6 +25,13 @@ public class UserPasswordRestFallback implements UserPasswordRest {
     }
 
     @Override
+    public String hashPass(String user,String pass) {
+        logger.error("Error al accesar al servicio recover password: {}", user);
+        return null;
+    }
+
+
+    @Override
     public void validatePassword(RecoverPasswordRequestView requestView) {
         logger.error("Error al accesar al servicio validate password: {} ", requestView);
     }
