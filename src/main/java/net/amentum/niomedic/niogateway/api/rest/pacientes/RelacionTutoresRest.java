@@ -22,4 +22,7 @@ public interface RelacionTutoresRest {
     @GetMapping("relacion-tutores/find")
     RelacionTutoresView getRelacionTutor(@RequestParam(value = "idPaciente") String idPaciente);
 
+    @GetMapping("relacion-tutores/find-by-tutor/{idTutor}")
+    RelacionTutoresView getRelacionTutorByTutor(@PathVariable("idTutor") String idTutor);
+
 }

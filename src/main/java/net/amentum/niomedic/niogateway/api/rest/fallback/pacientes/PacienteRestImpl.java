@@ -5,6 +5,8 @@ import net.amentum.niomedic.niogateway.api.rest.Page;
 import net.amentum.niomedic.niogateway.api.rest.pacientes.PacienteRest;
 import net.amentum.niomedic.pacientes.views.PacientePageView;
 import net.amentum.niomedic.pacientes.views.PacienteView;
+import net.amentum.niomedic.pacientes.views.RelacionTitularView;
+import net.amentum.niomedic.pacientes.views.RelacionTutoresView;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
