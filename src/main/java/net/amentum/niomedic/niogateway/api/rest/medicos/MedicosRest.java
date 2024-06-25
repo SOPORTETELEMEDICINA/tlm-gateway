@@ -3,6 +3,7 @@ package net.amentum.niomedic.niogateway.api.rest.medicos;
 import java.util.List; // Sre19062020 Nuevo
 
 import net.amentum.niomedic.medicos.views.MedicoAgendaPageView;
+import net.amentum.niomedic.medicos.views.MedicoFirmaView;
 import net.amentum.niomedic.medicos.views.MedicoPageView;
 import net.amentum.niomedic.medicos.views.MedicoView;
 import net.amentum.niomedic.niogateway.api.rest.Page;
@@ -60,4 +61,7 @@ public interface MedicosRest {
                                                        @RequestParam(required = false, value = "size") Integer size,
                                                        @RequestParam(required = false, value = "orderColumn") String orderColumn,
                                                        @RequestParam(required = false, value = "orderType") String orderType);
+
+   @GetMapping("medicos/firma/{idFirma}")
+   MedicoFirmaView getSignatureById(@PathVariable("idFirma") Integer idFirma);
 }

@@ -3,6 +3,7 @@ package net.amentum.niomedic.niogateway.api.rest.fallback.medicos;
 import java.util.List; // Sre19062020 Nuevo
 
 import net.amentum.niomedic.medicos.views.MedicoAgendaPageView;
+import net.amentum.niomedic.medicos.views.MedicoFirmaView;
 import net.amentum.niomedic.medicos.views.MedicoPageView;
 import net.amentum.niomedic.niogateway.api.rest.BaseController;
 import net.amentum.niomedic.medicos.views.MedicoView;
@@ -77,6 +78,12 @@ public class MedicoRestImpl extends BaseController implements MedicosRest {
    @Override
    public Page<MedicoAgendaPageView> getDetailsByEspecialidad(String nombreEspecialidad, Integer page, Integer size, String orderColumn, String orderType) {
       logger.error("Error al accesar al servicio para obtener médicos por especialidad");
+      return null;
+   }
+
+   @Override
+   public MedicoFirmaView getSignatureById(Integer idFirma) {
+      logger.error("Error al accesar al servicio para obtener la firma del medico");
       return null;
    }
 }
