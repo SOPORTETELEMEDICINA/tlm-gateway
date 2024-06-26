@@ -3,12 +3,10 @@ package net.amentum.niomedic.niogateway.api.rest.fallback.pacientes;
 import net.amentum.niomedic.niogateway.api.rest.BaseController;
 import net.amentum.niomedic.niogateway.api.rest.Page;
 import net.amentum.niomedic.niogateway.api.rest.pacientes.PacienteRest;
-import net.amentum.niomedic.pacientes.views.PacientePageView;
-import net.amentum.niomedic.pacientes.views.PacienteView;
-import net.amentum.niomedic.pacientes.views.RelacionTitularView;
-import net.amentum.niomedic.pacientes.views.RelacionTutoresView;
+import net.amentum.niomedic.pacientes.views.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.List;
 
@@ -112,5 +110,13 @@ public Page<PacientePageView> getPacienteSearch(Boolean active, String datosBusq
    public void setIdDevice(Integer idUsuario, String idDevice) {
       logger.error("Error al acceder al servicio para hacer update del id de dispositivo");
    }
+
+   @Override
+   public PacienteTitularView getTitularPorTelefono(@PathVariable("telefono") String telefono) {
+      logger.error("Error al acceder al servicio obtener el titular por telefono");
+
+      return null;
+   }
+
 }
 

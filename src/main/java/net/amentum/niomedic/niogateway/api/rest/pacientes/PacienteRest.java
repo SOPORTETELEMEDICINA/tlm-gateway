@@ -3,10 +3,7 @@ package net.amentum.niomedic.niogateway.api.rest.pacientes;
 import net.amentum.niomedic.niogateway.api.rest.Page;
 import net.amentum.niomedic.niogateway.api.rest.fallback.pacientes.PacienteRestImpl;
 import net.amentum.niomedic.pacientes.exceptions.PacienteException;
-import net.amentum.niomedic.pacientes.views.PacientePageView;
-import net.amentum.niomedic.pacientes.views.PacienteView;
-import net.amentum.niomedic.pacientes.views.RelacionTitularView;
-import net.amentum.niomedic.pacientes.views.RelacionTutoresView;
+import net.amentum.niomedic.pacientes.views.*;
 import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
@@ -102,5 +99,9 @@ public interface PacienteRest {
    @PutMapping("pacientes/setIdDevice")
    void setIdDevice(@RequestParam(value="idUsuario") Integer idUsuario,
                     @RequestParam(value="idDevice") String idDevice) throws PacienteException;
+
+   @GetMapping("pacientes/titular-por-telefono/{telefono}")
+   PacienteTitularView getTitularPorTelefono(@PathVariable("telefono") String telefono) throws PacienteException;
+
 
 }
