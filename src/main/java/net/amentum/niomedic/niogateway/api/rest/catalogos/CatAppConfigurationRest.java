@@ -15,6 +15,8 @@ import org.springframework.web.bind.annotation.RestController;
 @FeignClient(value = "http://nio-catalogos", fallback = CatAppConfigurationServiceImpl.class)
 public interface CatAppConfigurationRest {
 
-    @GetMapping("AppConfiguration/IdAppConfiguration/{idCliente}")
-    CatAppConfigurationView getUserByidCliente(@PathVariable("idCliente") Integer idCliente);
+//    @GetMapping("AppConfiguration/IdAppConfiguration/{idCliente}")
+//    CatAppConfigurationView getUserByidCliente(@PathVariable("idCliente") Integer idCliente);
+    @GetMapping("AppConfiguration/CustomerConfig/{cliente}")
+    CatAppConfigurationView getUserByCliente(@PathVariable("cliente") String cliente);
 }

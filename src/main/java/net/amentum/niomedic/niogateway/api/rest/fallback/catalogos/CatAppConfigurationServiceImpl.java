@@ -11,11 +11,14 @@ import java.util.List;
 public class CatAppConfigurationServiceImpl {
     private Logger logger = LoggerFactory.getLogger(CatAppConfigurationServiceImpl.class);
 
-    public CatAppConfigurationView getUserByidCliente(Integer IdCliente) {
-        logger.error("Error al accesar al servicio para OBTENER POR ID CatAppConfiguration {}", IdCliente);
+//    public CatAppConfigurationView getUserByidCliente(Integer IdCliente) {
+//        logger.error("Error al accesar al servicio para OBTENER POR ID CatAppConfiguration {}", IdCliente);
+//        return null;
+//    }
+    public CatAppConfigurationView getConfigByCliente(String cliente) {
+        logger.error("Error al accesar al servicio para OBTENER La Configuracion del cliente {}", cliente);
         return null;
     }
-
 
 
 
