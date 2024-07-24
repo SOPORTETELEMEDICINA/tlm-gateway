@@ -33,7 +33,9 @@ public interface CatCie10Rest {
                                                 @RequestParam(required = false, defaultValue = "0", value = "page") Integer page,
                                                 @RequestParam(required = false, defaultValue = "10", value = "size") Integer size,
                                                 @RequestParam(required = false, defaultValue = "nombre", value = "orderColumn") String orderColumn,
-                                                @RequestParam(required = false, defaultValue = "asc", value = "orderType") String orderType);
+                                                @RequestParam(required = false, defaultValue = "asc", value = "orderType") String orderType,
+                                                @RequestParam(required = false, defaultValue = "", value = "sexo") String sexo,
+                                                @RequestParam(required = false, defaultValue = "0", value = "edad")Integer edad);
 
    @PostMapping("cat-cie10")
    CatCie10View createCatCie10(@RequestBody @Validated CatCie10View catCie10View);
