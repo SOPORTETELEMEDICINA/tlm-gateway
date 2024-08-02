@@ -29,9 +29,11 @@ public class CatCie10RestImpl extends BaseController implements CatCie10Rest {
                                                        Integer page,
                                                        Integer size,
                                                        String orderColumn,
-                                                       String orderType) {
-      logger.error("Error al OBTENER PÁGINA de CIE-10 - datosBusqueda: {} - activo: {} - page: - {} size: {} - orderColumn: {} - orderType: {}",
-         datosBusqueda, activo, page, size, orderColumn, orderType);
+                                                       String orderType,
+                                                       String sexo,
+                                                       Integer edad) {
+      logger.error("Error al OBTENER PÁGINA de CIE-10 - datosBusqueda: {} - activo: {} - page: - {} size: {} - orderColumn: {} - orderType: {} - sexo: {} - edad: {}",
+         datosBusqueda, activo, page, size, orderColumn, orderType, sexo, edad);
       return null;
    }
 
