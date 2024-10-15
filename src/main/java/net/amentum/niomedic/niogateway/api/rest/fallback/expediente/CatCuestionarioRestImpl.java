@@ -28,7 +28,7 @@ public class CatCuestionarioRestImpl extends BaseController implements CatCuesti
     }
 
     @Override
-    public Page<CatCuestionarioView> getCuestionarioSearch(Integer page, Integer size, String orderColumn, String orderType) {
+    public Page<CatCuestionarioView> getCuestionarioSearch(Integer page, Integer size, String orderColumn, String orderType, String idPaciente, Integer idStatus) {
         logger.error("Error al acceder al servicio para OBTENER un cuestionario");
         return null;
     }

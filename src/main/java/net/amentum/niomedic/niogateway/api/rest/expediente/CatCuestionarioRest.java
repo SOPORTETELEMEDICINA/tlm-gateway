@@ -24,6 +24,8 @@ public interface CatCuestionarioRest {
     Page<CatCuestionarioView> getCuestionarioSearch(@RequestParam(required = false, value = "page") Integer page,
                                                       @RequestParam(required = false, value = "size") Integer size,
                                                       @RequestParam(required = false, value = "orderColumn") String orderColumn,
-                                                      @RequestParam(required = false, value = "orderType") String orderType);
+                                                      @RequestParam(required = false, value = "orderType") String orderType,
+                                                      @RequestParam(required = false, value = "idPaciente") String idPaciente,
+                                                      @RequestParam(required = false, value = "idStatus") Integer idStatus);
 
 }
