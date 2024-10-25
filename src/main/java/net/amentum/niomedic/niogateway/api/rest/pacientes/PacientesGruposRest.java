@@ -1,17 +1,18 @@
 package net.amentum.niomedic.niogateway.api.rest.pacientes;
 
-import net.amentum.niomedic.niogateway.api.rest.fallback.pacientes.PacientesGruposRestImpl;
-import net.amentum.niomedic.pacientes.views.PacientesGruposView;
+import net.amentum.niomedic.niogateway.api.rest.Page;
+import net.amentum.niomedic.niogateway.api.rest.fallback.pacientes.PacienteRestImpl;
 import net.amentum.niomedic.pacientes.exceptions.PacienteException;
+import net.amentum.niomedic.pacientes.views.*;
 import org.springframework.cloud.netflix.feign.FeignClient;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 
 @RestController
-@FeignClient(value = "nio-pacientes", path = "pacientes_grupos", fallback = PacientesGruposRestImpl.class)
+@FeignClient(value = "http://nio-pacientes", fallback = PacienteRestImpl.class)
 public interface PacientesGruposRest {
-
-   @GetMapping("{idPaciente}")
-   PacientesGruposView findFirstByIdPaciente(@PathVariable("idPaciente") String idPaciente) throws PacienteException;
-
+    @GetMapping("pacientes_grupos/{idPaciente}")
+    PacientesGruposView findFirstByIdPaciente(@PathVariable() String idPaciente);
 }

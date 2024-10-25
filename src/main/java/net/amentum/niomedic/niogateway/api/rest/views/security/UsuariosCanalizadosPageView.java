@@ -20,4 +20,6 @@ public class UsuariosCanalizadosPageView implements Serializable {
     private Date fechaInicial;
     private Date fechaFinal;
     private Long usuariosCanalizadosId;
+    private Integer idGroup;
+    private String groupName;
 }
