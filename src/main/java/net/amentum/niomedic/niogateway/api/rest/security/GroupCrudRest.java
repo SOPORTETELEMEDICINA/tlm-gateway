@@ -14,28 +14,31 @@ import java.util.Collection;
 @RequestMapping("groups-crud")
 public interface GroupCrudRest {
 
-    @RequestMapping(method = RequestMethod.POST)
+    @PostMapping()
     void addGroup(@RequestBody GroupCrudView group);
 
-    @RequestMapping(value = "{groupCrudId}",method = RequestMethod.PUT)
-    void editGroup(@RequestBody @Validated GroupCrudView group, @PathVariable()Long groupCrudId);
+    @PutMapping(value = "{groupCrudId}")
+    void editGroup(@RequestBody @Validated GroupCrudView group, @PathVariable("groupCrudId")Long groupCrudId);
 
-    @RequestMapping(value = "{groupCrudId}",method = RequestMethod.DELETE)
-    void deleteGroup(@PathVariable()Long groupCrudId);
+    @DeleteMapping(value = "{groupCrudId}")
+    void deleteGroup(@PathVariable("groupCrudId")Long groupCrudId);
 
-    @RequestMapping(method = RequestMethod.GET)
-    Page<GroupCrudView> findPage(@RequestParam(required = false, value = "gid", defaultValue = "0" ) Integer gid,
-                                 @RequestParam(required = false, value = "page", defaultValue = "0") Integer page,
-                                 @RequestParam(required = false, value = "size", defaultValue = "25") Integer size,
+    @GetMapping()
+    Page<GroupCrudView> findPage(@RequestParam(required = false, value = "gid") Integer gid,
+                                 @RequestParam(required = false, value = "page") Integer page,
+                                 @RequestParam(required = false, value = "size") Integer size,
                                  @RequestParam(required = false, value = "orderColumn") String orderColumn,
                                  @RequestParam(required = false, value = "orderType")String orderType);
 
-    @RequestMapping(value = "all",method = RequestMethod.GET)
+    @GetMapping(value ="all")
     Collection<GroupCrudView> findAll();
 
-    @RequestMapping(value = "image",method = RequestMethod.GET)
-    String findImageGroupCrud(@RequestParam(required = true)Integer gid,@RequestParam(required = true)String color);
+    @GetMapping(value = "image")
+    String findImageGroupCrud(
+            @RequestParam(required = false, value = "gid") Long gid,
+            @RequestParam(required = false, value = "color") String color
+    );
 
-    @RequestMapping(value = "{groupCrudId}",method = RequestMethod.GET)
-    GroupCrudView findGroup(@PathVariable()Long groupCrudId);
+    @GetMapping(value = "{groupCrudId}")
+    GroupCrudView findGroup(@PathVariable("groupCrudId") Long groupCrudId);
 }
