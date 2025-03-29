@@ -13,8 +13,9 @@ public class TutoresRestImpl extends BaseController implements TutoresRest {
     private Logger logger = LoggerFactory.getLogger(TutoresRestImpl.class);
 
     @Override
-    public void createTutores(TutoresView tutoresView) {
+    public TutoresView createTutores(TutoresView tutoresView) {
         logger.error("Error al accesar al servicio para agregar un tutor");
+        return null;
     }
 
     @Override

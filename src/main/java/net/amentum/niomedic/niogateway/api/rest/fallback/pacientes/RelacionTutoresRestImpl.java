@@ -30,8 +30,9 @@ public class RelacionTutoresRestImpl extends BaseController implements RelacionT
     }
 
     @Override
-    public RelacionTutoresView getRelacionTutorByTutor(String idTutor) {
+    public RelacionTutoresView getRelacionTutorByTutor(Integer idTutor) {
         logger.error("Error al accesar al servicio para obtener relaciones de paciente por tutor");
         return null;
     }
+
 }
