@@ -22,6 +22,7 @@ public class UserAppView implements Serializable {
    @NotEmpty(message = "Debe agregar un username")
    private String username;
    private String email;
+   private String curp;
    private String password;
    private String password2;
    private String password3;

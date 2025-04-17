@@ -19,8 +19,8 @@ public class UserPasswordRestFallback implements UserPasswordRest {
     }
 
     @Override
-    public UserAppPageView recoverPassword(String email) {
-        logger.error("Error al accesar al servicio recover password: {}", email);
+    public UserAppPageView recoverPassword(String curp) {
+        logger.error("Error al accesar al servicio recover password: {}", curp);
         return null;
     }
 

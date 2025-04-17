@@ -49,6 +49,7 @@ public class PacienteCompositeRest {
       UserAppView userAppView = pacienteUserVIew.getUserAppView();
       userAppView.setUsername(pacienteView.getUserName());
       userAppView.setEmail(pacienteView.getEmail());
+      userAppView.setCurp(pacienteView.getCurp());
       userAppView.setName(pacienteView.getNombre() + " " + pacienteView.getApellidoPaterno() + " " + pacienteView.getApellidoMaterno());
       userAppView.setStatus("ACTIVO");
       userAppView.setProfileId(27L);

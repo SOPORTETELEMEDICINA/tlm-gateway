@@ -19,7 +19,7 @@ public interface UserPasswordRest {
     void resetPassword(@PathVariable("idUserApp") Long idUserApp, @RequestBody @Validated ResetPasswordView resetPasswordView);
 
     @GetMapping(value = "users/recoverPassword")
-    UserAppPageView recoverPassword(@RequestParam(name = "email") String email);
+    UserAppPageView recoverPassword(@RequestParam(name = "curp") String curp);
 
     @GetMapping(value = "users/hashPass")
     String hashPass(@RequestParam(name = "user")String user,@RequestParam(name = "pass")String pass);

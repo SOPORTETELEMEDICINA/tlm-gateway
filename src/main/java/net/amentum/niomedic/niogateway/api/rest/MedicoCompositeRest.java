@@ -52,6 +52,7 @@ public class MedicoCompositeRest extends BaseController {
       UserAppView userAppView = medicoUserView.getUserAppView();
       userAppView.setUsername(medicoView.getUserName());
       userAppView.setEmail(medicoView.getEmail());
+      userAppView.setCurp(medicoView.getCurp());
       userAppView.setName(medicoView.getNombre() + " " + medicoView.getApellidoPaterno() + " " + medicoView.getApellidoMaterno());
       userAppView.setStatus("ACTIVO");
       userAppView.setProfileId(26L);
