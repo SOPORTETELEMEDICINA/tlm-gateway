@@ -24,5 +24,4 @@ public interface RelacionTutoresRest {
 
     @GetMapping("relacion-tutores/find-by-tutor/{idTutor}")
     RelacionTutoresView getRelacionTutorByTutor(@PathVariable("idTutor") String idTutor);
-
 }

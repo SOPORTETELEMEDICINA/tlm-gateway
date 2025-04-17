@@ -19,6 +19,9 @@ import java.util.List;
 @FeignClient(value = "http://nio-catalogos", fallback = CatEspecialidadesRestImpl.class)
 public interface CatEspecialidadesRest {
 
+   @GetMapping("/catalogo-especialidades")  // Endpoint del servicio de catálogo
+   List<CatEspecialidadesView> getEspecialidadesActivas();
+
    @GetMapping("catalogo-especialidades/{idCatEspecialidades}")
    CatEspecialidadesView getDetailsByIdCatEspecialidades(@PathVariable("idCatEspecialidades") Integer idCatEspecialidades);
 

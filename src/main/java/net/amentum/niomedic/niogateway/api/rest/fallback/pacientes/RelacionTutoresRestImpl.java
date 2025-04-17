@@ -34,4 +34,5 @@ public class RelacionTutoresRestImpl extends BaseController implements RelacionT
         logger.error("Error al accesar al servicio para obtener relaciones de paciente por tutor");
         return null;
     }
+
 }

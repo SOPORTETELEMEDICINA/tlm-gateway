@@ -44,8 +44,8 @@ public class GroupCrudRestFallback extends BaseController implements GroupCrudRe
     }
 
     @Override
-    public String findImageGroupCrud(Integer gid, String color) {
-        logger.error("Error al accesar a servicio para eliminar grupo: {}", gid);
+    public String findImageGroupCrud(Long gid, String color) {
+        logger.error("Error al accesar a servicio para entcontrar la imagen del grupo: {}", gid);
         return "";
     }
 

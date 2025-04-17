@@ -7,11 +7,18 @@ import net.amentum.niomedic.niogateway.api.rest.catalogos.CatEspecialidadesRest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.Collections;
 import java.util.List;
 
 public class CatEspecialidadesRestImpl extends BaseController implements CatEspecialidadesRest {
 
    private Logger logger = LoggerFactory.getLogger(CatEspecialidadesRestImpl.class);
+
+   @Override
+   public List<CatEspecialidadesView> getEspecialidadesActivas() {
+      logger.error("Error al acceder al servicio para obtener especialidades activas");
+      return Collections.emptyList();  // Devolvemos una lista vacía en caso de error
+   }
 
    public CatEspecialidadesView getDetailsByIdCatEspecialidades(Integer idCatEspecialidades) {
       logger.error("Error al accesar al servicio para OBTENER catálogo Especialidades por id: {}", idCatEspecialidades);

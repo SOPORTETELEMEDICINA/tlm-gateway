@@ -13,7 +13,7 @@ import java.util.List;
 public interface TutoresRest {
 
     @PostMapping("Tutores")
-    void createTutores(@RequestBody @Valid TutoresView tutoresView);
+    TutoresView createTutores(@RequestBody @Valid TutoresView tutoresView);
 
     @GetMapping("Tutores/findAll")
     List<TutoresView> findAll();
