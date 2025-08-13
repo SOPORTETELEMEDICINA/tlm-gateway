@@ -45,7 +45,7 @@ public interface ReportesRest {
    @GetMapping("reportes/notas-interconsulta/{idConsulta}")
    String getNotasInterconsulta(@PathVariable("idConsulta") Long idConsulta);
 
-   @GetMapping("reportes/historia-clinica/{idPaciente}")
-   String getHistoriaClinica(@PathVariable("idPaciente") String idPaciente);
+   @GetMapping("reportes/historia-clinica/{idPaciente}/{idGroup}")
+   String getHistoriaClinica(@PathVariable("idPaciente") String idPaciente, @PathVariable("idGroup") Long idGroup);
 
 }

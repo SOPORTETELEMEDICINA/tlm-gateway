@@ -31,6 +31,7 @@ public class UserAppView implements Serializable {
    @NotEmpty(message = "Debe ingresar el nombre del usuario")
    private String name;
    private String status;
+   private String motivo;
    private Long customerId;
    private List<UserExtraInfoView>  extraList =  new ArrayList<>();
    //@NotNull(message = "Debe ingresar el id del perfil")
@@ -65,6 +66,7 @@ public class UserAppView implements Serializable {
          ", createdDate=" + createdDate +
          ", name='" + name + '\'' +
          ", status='" + status + '\'' +
+         ", motivo='" + motivo + '\'' +
          ", customerId=" + customerId +
          ", extraList=" + extraList +
          ", profileId=" + profileId +

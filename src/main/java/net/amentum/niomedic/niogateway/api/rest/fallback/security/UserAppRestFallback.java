@@ -42,7 +42,7 @@ public class UserAppRestFallback implements UserAppRest {
    }
 
    @Override
-   public void deleteUserApp(Long idUserApp) {
+   public void deleteUserApp(Long idUserApp, String motivo) {
 
    }
 

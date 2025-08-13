@@ -63,8 +63,8 @@ public class ReportesRestImpl extends BaseController implements ReportesRest {
    }
 
    @Override
-   public String getHistoriaClinica(String idPaciente) {
-      logger.error("Error al accesar al servicio para OBTENER POR ID getHistoriaClinica {}", idPaciente);
+   public String getHistoriaClinica(String idPaciente, Long idGroup) {
+      logger.error("Error al accesar al servicio para OBTENER POR ID getHistoriaClinica {} para el grupo {}", idPaciente, idGroup);
       return null;
    }
 }

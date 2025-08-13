@@ -37,8 +37,8 @@ public interface UserAppRest {
    @GetMapping("users/{idUserApp}")
    UserAppView findById(@PathVariable("idUserApp") Long idUserApp, @RequestParam(required = false, name = "image") Boolean image);
 
-   @DeleteMapping("users/{idUserApp}")
-   void deleteUserApp(@PathVariable("idUserApp") Long idUserApp);
+   @DeleteMapping("users/{idUserApp}/{motivo}")
+   void deleteUserApp(@PathVariable("idUserApp") Long idUserApp, @PathVariable("motivo") String motivo);
 
    @PostMapping("users/secure/logout")
    void logout();

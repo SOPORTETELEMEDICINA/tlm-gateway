@@ -101,9 +101,9 @@ public class UserAppRestApi extends BaseController {
       return this.userAppRest.findById(idUserApp, image);
    }
 
-   @DeleteMapping( "{idUserApp}")
-   void deleteUserApp(@PathVariable("idUserApp") Long idUserApp){
-      this.userAppRest.deleteUserApp(idUserApp);
+   @DeleteMapping( "{idUserApp}/{motivo}")
+   void deleteUserApp(@PathVariable("idUserApp") Long idUserApp, @PathVariable("motivo") String motivo){
+      this.userAppRest.deleteUserApp(idUserApp, motivo);
    }
 
    @PostMapping( "secure/logout")
