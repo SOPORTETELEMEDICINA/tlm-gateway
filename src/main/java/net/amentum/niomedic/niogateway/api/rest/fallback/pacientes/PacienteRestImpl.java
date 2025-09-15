@@ -118,5 +118,17 @@ public Page<PacientePageView> getPacienteSearch(Boolean active, String datosBusq
       return null;
    }
 
+    @Override
+    public Page<PacientePageView> getPacientePageByGroupWithDevice(Long selectGroup,
+                                                                   Integer page,
+                                                                   Integer size,
+                                                                   String orderColumn,
+                                                                   String orderType) {
+        logger.error("Fallback | Error al OBTENER PÁGINA por grupo con device - selectGroup: {} - page: {} - size: {} - orderColumn: {} - orderType: {}",
+                selectGroup, page, size, orderColumn, orderType);
+        return null; // mismo patrón que tus otros fallbacks
+    }
+
+
 }
 
