@@ -104,11 +104,8 @@ public interface PacienteRest {
    PacienteTitularView getTitularPorTelefono(@PathVariable("telefono") String telefono) throws PacienteException;
 
     @GetMapping("pacientes/page/by-group-with-device")
-    Page<PacientePageView> getPacientePageByGroupWithDevice(
+    List<PacienteDeviceMinView> getPacientesByGroupWithDevice(
             @RequestParam(value = "selectGroup", required = true) Long selectGroup,
-            @RequestParam(value = "page",        required = false) Integer page,
-            @RequestParam(value = "size",        required = false) Integer size,
             @RequestParam(value = "orderColumn", required = false) String orderColumn,
-            @RequestParam(value = "orderType",   required = false) String orderType
-    ) throws PacienteException;
+            @RequestParam(value = "orderType",   required = false) String orderType) throws PacienteException;
 }

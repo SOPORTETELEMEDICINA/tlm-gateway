@@ -119,16 +119,12 @@ public Page<PacientePageView> getPacienteSearch(Boolean active, String datosBusq
    }
 
     @Override
-    public Page<PacientePageView> getPacientePageByGroupWithDevice(Long selectGroup,
-                                                                   Integer page,
-                                                                   Integer size,
-                                                                   String orderColumn,
-                                                                   String orderType) {
-        logger.error("Fallback | Error al OBTENER PÁGINA por grupo con device - selectGroup: {} - page: {} - size: {} - orderColumn: {} - orderType: {}",
-                selectGroup, page, size, orderColumn, orderType);
-        return null; // mismo patrón que tus otros fallbacks
+    public List<PacienteDeviceMinView> getPacientesByGroupWithDevice(Long selectGroup,
+                                                                     String orderColumn,
+                                                                     String orderType) {
+        logger.error("Fallback | Error al obtener LISTA por grupo con device - selectGroup: {} - orderColumn: {} - orderType: {}",
+                selectGroup, orderColumn, orderType);
+        return java.util.Collections.emptyList(); // o null si sigues ese patrón
     }
-
-
 }
 
