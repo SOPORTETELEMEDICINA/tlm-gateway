@@ -193,16 +193,17 @@ public class ConsultaRestApi extends BaseController {
                                         @RequestParam(required = false, value = "orderColumn") String orderColumn,
                                         @RequestParam(required = false, value = "orderType") String orderType,
                                         @RequestParam(required = false, value = "startDate") Long startDate,
-                                        @RequestParam(required = false, value = "endDate") Long endDate) throws Exception {
+                                        @RequestParam(required = false, value = "endDate") Long endDate,
+                                        @RequestParam(required = false, value="idGroup") Integer idGroup) throws Exception {
       if ((idPaciente == null || idPaciente.isEmpty()) && (idMedico == null || idMedico.isEmpty())) {
          logger.info("getConsultasearch() - idMedico e idPaciente vienen vacíos, obteniendo idUsuarios");
          String decrypted = securityHandlerProvider.decryptHeader(request);
          idUsuario = securityHandlerProvider.getHierarchy("UA", decrypted);
          logger.info("getConsultasearch() - Lista de usuarios:{}", idUsuario);
       }
-      logger.info("getConsultasearch() - Obtener listado Consulta paginable: - idPaciente {} - idUsuario:{} - idEstadoConsulta:{} - idTipoConsulta:{} - idMedico {} - page {} - size: {} - orderColumn: {} - orderType: {} - startDate: {}  - endDate: {}",
-         idPaciente, idUsuario, idMedico, idEstadoConsulta, idTipoConsulta, page, size, orderColumn, orderType, startDate, endDate);
-      return this.consultaRest.getConsultasearch(idPaciente, idUsuario, idMedico, idEstadoConsulta, idTipoConsulta, page, size, orderColumn, orderType, startDate, endDate);
+      logger.info("getConsultasearch() - Obtener listado Consulta paginable: - idPaciente {} - idUsuario:{} - idEstadoConsulta:{} - idTipoConsulta:{} - idMedico {} - page {} - size: {} - orderColumn: {} - orderType: {} - startDate: {}  - endDate: {} - idGroup: {}",
+         idPaciente, idUsuario, idMedico, idEstadoConsulta, idTipoConsulta, page, size, orderColumn, orderType, startDate, endDate, idGroup);
+      return this.consultaRest.getConsultasearch(idPaciente, idUsuario, idMedico, idEstadoConsulta, idTipoConsulta, page, size, orderColumn, orderType, startDate, endDate, idGroup);
    }
 
    @GetMapping("/{idConsulta}")

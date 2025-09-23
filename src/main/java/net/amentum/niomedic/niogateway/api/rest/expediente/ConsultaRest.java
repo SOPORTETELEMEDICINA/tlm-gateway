@@ -53,18 +53,21 @@ public interface ConsultaRest {
    /*@PutMapping("consulta/{numeroConsulta}/estatus/{idEstatus}")
    void updateEstatus(@PathVariable("numeroConsulta") Long numeroConsulta, @PathVariable("idEstatus") String idEstatus, @RequestBody @Validated ConsultaView consultaView);
    */
-   @GetMapping("consulta/search")
-   Page<ConsultaView> getConsultasearch(@RequestParam(required = false, defaultValue = "", value="idPaciente") String idPaciente,
-				 @RequestParam(required = false, value="idUsuario") List<Long> idUsuario,
-                 @RequestParam(required = false, value="idMedico") String idMedico,
-                 @RequestParam(required = false, value="idEstadoConsulta") List<Integer> idEstadoConsulta,
-                 @RequestParam(required = false, value="idTipoConsulta") Integer idTipoConsulta,
-                 @RequestParam(required = false, value="page") Integer page,
-                 @RequestParam(required = false, value="size") Integer size,
-                 @RequestParam(required = false, value="orderColumn") String orderColumn,
-                 @RequestParam(required = false, value="orderType") String orderType,
-                 @RequestParam(required = false, value="startDate") Long startDate,
-                 @RequestParam(required = false, value="endDate") Long endDate);
+    @GetMapping("consulta/search")
+    Page<ConsultaView> getConsultasearch(
+            @RequestParam(required = false, defaultValue = "", value = "idPaciente") String idPaciente,
+            @RequestParam(required = false, value = "idUsuario") List<Long> idUsuario,
+            @RequestParam(required = false, value = "idMedico") String idMedico,
+            @RequestParam(required = false, value = "idEstadoConsulta") List<Integer> idEstadoConsulta,
+            @RequestParam(required = false, value = "idTipoConsulta") Integer idTipoConsulta,
+            @RequestParam(required = false, value = "page") Integer page,
+            @RequestParam(required = false, value = "size") Integer size,
+            @RequestParam(required = false, value = "orderColumn") String orderColumn,
+            @RequestParam(required = false, value = "orderType") String orderType,
+            @RequestParam(required = false, value = "startDate") Long startDate,
+            @RequestParam(required = false, value = "endDate") Long endDate,
+            @RequestParam(required = false, value = "idGroup") Integer idGroup // <-- NUEVO
+    );
 
    @GetMapping("consulta/{idConsulta}")
    ConsultaView getConsultaById(@PathVariable("idConsulta") Long  idConsulta);

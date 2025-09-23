@@ -74,11 +74,12 @@ public class ConsultaRestImpl extends BaseController implements ConsultaRest {
 		   									   String orderColumn,
 		   									   String orderType,
 		   									   Long startDate,
-		   									   Long endDate) {
-		logger.error("Error al OBTENER PÁGINA de consulta - idPaciente: {} - idUsuario:{} - idMedico: {} - idEstadoConsulta:{} - idTipoConsulta:{} - page: - {} size: {} - orderColumn: {} - orderType: {} - startDate: {} - endDate: {}",
-	         idPaciente,idUsuario, idMedico,idEstadoConsulta,idTipoConsulta, page, size, orderColumn, orderType, startDate, endDate);
-	return null;
-}
+		   									   Long endDate,
+                                               Integer idGroup) {
+		logger.error("Error al OBTENER PÁGINA de consulta - idPaciente: {} - idUsuario:{} - idMedico: {} - idEstadoConsulta:{} - idTipoConsulta:{} - page: - {} size: {} - orderColumn: {} - orderType: {} - startDate: {} - endDate: {}, idGroup={}",
+	         idPaciente,idUsuario, idMedico,idEstadoConsulta,idTipoConsulta, page, size, orderColumn, orderType, startDate, endDate, idGroup);
+        return null;
+    }
 
 
 	public ConsultaView getConsultaById(Long idConsulta) {
