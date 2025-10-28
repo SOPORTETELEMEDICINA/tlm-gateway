@@ -7,15 +7,17 @@ import org.springframework.cloud.netflix.feign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.UUID;
 
+@RestController
 @FeignClient(value = "http://nio-expediente", fallback = AlertaNotificacionRestImpl.class)
 public interface AlertaNotificacionRest {
 
     @GetMapping("alertas/notificaciones/activas/{idMedico}")
-    List<AlertaNotificacionView> listActivas(@PathVariable("idMedico") String idMedico);
+    List<AlertaNotificacionView> listActivas(@PathVariable("idMedico") UUID idMedico);
 
     @GetMapping("alertas/notificaciones/activas/{idMedico}/count")
-    Long countActivas(@PathVariable("idMedico") String idMedico);
+    Long countActivas(@PathVariable("idMedico") UUID idMedico);
 
     @PutMapping("alertas/notificaciones/{id}/visto")
     void markAsSeen(@PathVariable("id") Long id);

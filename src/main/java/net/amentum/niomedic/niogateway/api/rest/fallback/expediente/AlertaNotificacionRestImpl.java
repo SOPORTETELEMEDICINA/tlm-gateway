@@ -8,19 +8,20 @@ import org.slf4j.LoggerFactory;
 
 import java.util.Collections;
 import java.util.List;
+import java.util.UUID;
 
 public class AlertaNotificacionRestImpl extends BaseController implements AlertaNotificacionRest {
 
     private final Logger logger = LoggerFactory.getLogger(AlertaNotificacionRestImpl.class);
 
     @Override
-    public List<AlertaNotificacionView> listActivas(String idMedico) {
+    public List<AlertaNotificacionView> listActivas(UUID idMedico) {
         logger.error("Error al acceder al servicio expediente para obtener notificaciones activas del médico {}", idMedico);
         return Collections.emptyList();
     }
 
     @Override
-    public Long countActivas(String idMedico) {
+    public Long countActivas(UUID idMedico) {
         logger.error("Error al acceder al servicio expediente para obtener conteo de notificaciones activas del médico {}", idMedico);
         return 0L;
     }
