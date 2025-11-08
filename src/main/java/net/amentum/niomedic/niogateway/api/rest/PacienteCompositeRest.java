@@ -141,61 +141,118 @@ public class PacienteCompositeRest {
       }
    }
 
-   @PutMapping()
-   public PacienteView updatePacienteUserView(@RequestBody @Validated PacienteUserView pacienteUserView) throws MedicoCompositeException {
-      try {
-         if (pacienteUserView.getUserAppView().getIdUserApp() != null) {
-            System.out.println(pacienteUserView.getPacienteVIew().getIdUsuario() + "-" + pacienteUserView.getUserAppView().getIdUserApp().longValue());
-            if (pacienteUserView.getPacienteVIew().getIdUsuario() == pacienteUserView.getUserAppView().getIdUserApp().longValue() ?
-               (pacienteUserView.getPacienteVIew().getIdPaciente() != null && !pacienteUserView.getPacienteVIew().getIdPaciente().isEmpty()) :
-               false) {
-               logger.info("===>>>updatePacienteUserView() - ACTUALIZANDO PACIENTE {} y USUARIO {}", pacienteUserView.getPacienteVIew().getIdPaciente(), pacienteUserView.getUserAppView().getIdUserApp());
-               //////////////los datos por default
-               PacienteView pacienteView = pacienteUserView.getPacienteVIew();
-               UserAppView userAppView = pacienteUserView.getUserAppView();
-               userAppView.setUsername(pacienteView.getUserName());
-               userAppView.setEmail(pacienteView.getEmail());
-               userAppView.setName(pacienteView.getNombre() + " " + pacienteView.getApellidoPaterno() + " "
-                  + pacienteView.getApellidoMaterno());
-               userAppView.setStatus("ACTIVO");
-               userAppView.setProfileId(27L);
-               userAppView.setIdTipoUsuario(3);
-               List<Long> tempo = new ArrayList<>();
-               tempo.add(2L);
-               // Sre03072020 Inicia En update acá no tengo porqué cambiar los grupos del paciente!:
-               //userAppView.setGroupList(tempo);
-               // Sre03072020 Termina
-               ProfileView profileView = profileRest.findProfile(27L);
-               List<Long> idPermissionsList = new ArrayList<>();
-               for (NodeTree node : profileView.getTree()) {
-                  for (NodeTree children : node.getChildren()) {
-                     if (children.getActive()) {
-                        idPermissionsList.add(children.getId());
-                     }
-                  }
-               }
-               userAppView.setPermissionsList(idPermissionsList);
-               pacienteView.setIdUsuario(userAppView.getIdUserApp());
-               pacienteView.setUserName(userAppView.getUsername());
-               //////////////los datos por default
-               userAppRest.updateUserApp(pacienteUserView.getUserAppView().getIdUserApp(), pacienteUserView.getUserAppView());
-               return pacienteRest.updatePaciente(pacienteUserView.getPacienteVIew().getIdPaciente(), pacienteUserView.getPacienteVIew());
-            } else {
-               return null;
+    @PutMapping
+    public PacienteView updatePacienteUserView(@RequestBody @Validated PacienteUserView v) throws MedicoCompositeException {
+        try {
+            // =========================
+            // 1) Normalizar/Completar IDs
+            // =========================
+            // a) Si el front no mandó idUserApp pero sí tenemos idPaciente, lo deducimos desde Pacientes
+            if ((v.getUserAppView() == null || v.getUserAppView().getIdUserApp() == null)
+                    && v.getPacienteVIew() != null
+                    && v.getPacienteVIew().getIdPaciente() != null
+                    && !v.getPacienteVIew().getIdPaciente().trim().isEmpty()) {
+
+                try {
+                    // Usa el método correcto del Feign: getPacienteById(String idPaciente)
+                    PacienteView actual = pacienteRest.getPacienteById(v.getPacienteVIew().getIdPaciente());
+                    if (actual != null && actual.getIdUsuario() != null) {
+                        if (v.getUserAppView() == null) {
+                            v.setUserAppView(new UserAppView());
+                        }
+                        v.getUserAppView().setIdUserApp(actual.getIdUsuario());
+                        v.getPacienteVIew().setIdUsuario(actual.getIdUsuario());
+                        logger.info("IDs completados desde Pacientes: idUserApp/idUsuario={}", actual.getIdUsuario());
+                    }
+                } catch (Exception ex) {
+                    logger.warn("No fue posible completar IDs desde Pacientes con idPaciente={} - {}",
+                            v.getPacienteVIew().getIdPaciente(), ex.toString());
+                }
             }
-         } else {
-            return null;
-         }
 
-      } catch (Exception ex) {
-         logger.error("===>>>updatePacienteUserView() - ocurrio un error al Actualizar al PACIENTE y el USUARIO -{}", ex);
-         MedicoCompositeException mcE = new MedicoCompositeException("Error en nuevo USUARIO", MedicoCompositeException.LAYER_REST, MedicoCompositeException.ACTION_INSERT);
-         mcE.addError("No se pudo actualizar el  USUARIO: " + apiErrorDecoder.toString().replace('\"', ' '));
-         throw mcE;
-      }
-   }
+            // b) Si falta idUsuario en el paciente pero sí tenemos idUserApp en user, lo copiamos
+            if (v.getPacienteVIew() != null
+                    && v.getPacienteVIew().getIdUsuario() == null
+                    && v.getUserAppView() != null
+                    && v.getUserAppView().getIdUserApp() != null) {
+                v.getPacienteVIew().setIdUsuario(v.getUserAppView().getIdUserApp());
+            }
 
-   @DeleteMapping("rollback/user")
+            // =========================
+            // 2) Validación mínima para proceder
+            // =========================
+            if (v.getUserAppView() == null || v.getUserAppView().getIdUserApp() == null) {
+                logger.warn("Payload sin idUserApp; no es posible actualizar USUARIO/PACIENTE. Payload: {}", v);
+                return null;
+            }
+            if (v.getPacienteVIew() == null
+                    || v.getPacienteVIew().getIdPaciente() == null
+                    || v.getPacienteVIew().getIdPaciente().trim().isEmpty()) {
+                logger.warn("Payload sin idPaciente; no es posible actualizar PACIENTE. Payload: {}", v);
+                return null;
+            }
+            if (!v.getUserAppView().getIdUserApp().equals(v.getPacienteVIew().getIdUsuario())) {
+                logger.warn("Inconsistencia: idUserApp != idUsuario ({} != {}). Payload: {}",
+                        v.getUserAppView().getIdUserApp(), v.getPacienteVIew().getIdUsuario(), v);
+                return null;
+            }
+
+            logger.info("===>>>updatePacienteUserView() - ACTUALIZANDO PACIENTE {} y USUARIO {}",
+                    v.getPacienteVIew().getIdPaciente(), v.getUserAppView().getIdUserApp());
+
+            // =========================
+            // 3) Defaults obligatorios (mismo criterio que en create)
+            // =========================
+            PacienteView pacienteView = v.getPacienteVIew();
+            UserAppView userAppView = v.getUserAppView();
+
+            userAppView.setUsername(pacienteView.getUserName());
+            userAppView.setEmail(pacienteView.getEmail());
+            userAppView.setName(
+                    (pacienteView.getNombre() == null ? "" : pacienteView.getNombre()) + " " +
+                            (pacienteView.getApellidoPaterno() == null ? "" : pacienteView.getApellidoPaterno()) + " " +
+                            (pacienteView.getApellidoMaterno() == null ? "" : pacienteView.getApellidoMaterno())
+            );
+            userAppView.setStatus("ACTIVO");
+            userAppView.setProfileId(27L);
+            userAppView.setIdTipoUsuario(3);
+            // En UPDATE no cambiamos grupos
+
+            // Permisos del perfil 27 (PACIENTE)
+            ProfileView profileView = profileRest.findProfile(27L);
+            List<Long> idPermissionsList = new ArrayList<>();
+            for (NodeTree node : profileView.getTree()) {
+                for (NodeTree children : node.getChildren()) {
+                    if (children.getActive()) {
+                        idPermissionsList.add(children.getId());
+                    }
+                }
+            }
+            userAppView.setPermissionsList(idPermissionsList);
+
+            // Alinear campos espejo
+            pacienteView.setIdUsuario(userAppView.getIdUserApp());
+            pacienteView.setUserName(userAppView.getUsername());
+
+            // =========================
+            // 4) Ejecutar updates
+            // =========================
+            userAppRest.updateUserApp(userAppView.getIdUserApp(), userAppView);
+            return pacienteRest.updatePaciente(pacienteView.getIdPaciente(), pacienteView);
+
+        } catch (Exception ex) {
+            logger.error("===>>>updatePacienteUserView() - Ocurrió un error al Actualizar PACIENTE/USUARIO - {}", ex.toString());
+            MedicoCompositeException mcE = new MedicoCompositeException(
+                    "Error al actualizar PACIENTE/USUARIO",
+                    MedicoCompositeException.LAYER_REST,
+                    MedicoCompositeException.ACTION_UPDATE
+            );
+            mcE.addError("No se pudo actualizar: " + apiErrorDecoder.toString().replace('\"', ' '));
+            throw mcE;
+        }
+    }
+
+    @DeleteMapping("rollback/user")
    public void deletePaciente(@RequestParam Long idUsuario) throws PacienteException {
       logger.info("Haciendo rollback en usuarios");
       userAppRest.deleteRollBack(idUsuario);

@@ -4,8 +4,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Component;
 
-import java.util.UUID;
-
 @Component
 public class StompNotifierGateway implements NotifierGateway {
 
@@ -17,7 +15,14 @@ public class StompNotifierGateway implements NotifierGateway {
     }
 
     @Override
-    public void publishToMedico(UUID idMedico, Object payload) {
+    public void publishToGroup(Integer idGroup, Object payload) {
+        if (idGroup == null) return;
+        template.convertAndSend("/topic/grupo-" + idGroup, payload);
+    }
+
+    @Override
+    public void publishToMedico(String idMedico, Object payload) {
+        if (idMedico == null || idMedico.trim().isEmpty()) return;
         template.convertAndSend("/topic/medico-" + idMedico, payload);
     }
 }

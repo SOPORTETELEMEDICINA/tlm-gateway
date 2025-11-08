@@ -18,6 +18,7 @@ public class AlertaNotificacionPushRest {
 
     @PostMapping("/notificaciones")
     public void pushAlerta(@RequestBody AlertaNotificacionView view) {
-        notifier.publishToMedico(view.idMedico, view);
+        if (view == null) return;
+        notifier.publishToBoth(view.idMedico, view.idGroup, view);
     }
 }
